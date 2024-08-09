@@ -1,0 +1,21 @@
+{
+  "name": "accordion-fe-mentor",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.35"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.2",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.0",
+    "vue-tsc": "^2.0.29"
+  },
+  "packageManager": "yarn@4.3.1+sha512.af78262d7d125afbfeed740602ace8c5e4405cd7f4735c08feb327286b2fdb2390fbca01589bfd1f50b1240548b74806767f5a063c94b67e431aabd0d86f7774"
+}
