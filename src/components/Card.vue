@@ -25,23 +25,17 @@ const showAnswer = (isShown: boolean, id: number): void => {
     </div>
     <div class="faqs-list">
       <ul>
-        <li v-for="q in question" :key="q.id">
+        <li
+          @click="showAnswer(!answerShown[q.id], q.id)"
+          v-for="q in question"
+          :key="q.id"
+        >
           <div class="question">
             <span>{{ q.question }}</span>
-            <img
-              v-if="!answerShown[q.id]"
-              src="/images/icon-plus.svg"
-              alt=""
-              @click="showAnswer(true, q.id)"
-            />
-            <img
-              v-if="answerShown[q.id]"
-              src="/images/icon-minus.svg"
-              alt=""
-              @click="showAnswer(false, q.id)"
-            />
+            <img v-if="!answerShown[q.id]" src="/images/icon-plus.svg" alt="" />
+            <img v-if="answerShown[q.id]" src="/images/icon-minus.svg" alt="" />
           </div>
-          <Transition>
+          <Transition name="answer">
             <div v-show="answerShown[q.id]" class="answer">
               {{ q.answer }}
             </div>
@@ -54,6 +48,10 @@ const showAnswer = (isShown: boolean, id: number): void => {
 </template>
 
 <style scoped>
+hr {
+  opacity: 0.5;
+}
+
 .card-container {
   background-color: white;
   width: 300px;
@@ -63,15 +61,19 @@ const showAnswer = (isShown: boolean, id: number): void => {
   flex-direction: column;
   gap: 16px;
   border-radius: 8px;
+  box-shadow: 1px 1px 20px rgba(128, 128, 128, 0.212);
 }
+
 .card-header {
   display: flex;
   gap: 12px;
   align-items: center;
 }
+
 .card-header img {
   width: 18px;
 }
+
 h1 {
   font-size: 24px;
   font-weight: 700;
@@ -82,6 +84,7 @@ ul {
   flex-direction: column;
   gap: 12px;
 }
+
 ul li {
   display: flex;
   flex-direction: column;
@@ -90,35 +93,85 @@ ul li {
   font-size: 16px;
   color: var(--darkPurple);
   padding: 12px 0px;
+  cursor: pointer;
   /* border-bottom: 1px solid var(--grayishPurple); */
 }
+
+.question:hover {
+  color: #ad28eb;
+}
+
 .question {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
 }
+
 .question > span {
   max-width: 210px;
 }
+
 .question > img {
   width: 16px;
   /* flex: 1 1 0%; */
 }
+
 .answer {
   padding: 12px 0;
 }
 
-.v-enter-active,
-.v-leave-active {
+.answer-enter-active,
+.answer-leave-active {
   transform: translateY(0);
   opacity: 1;
   transition: all 0.4s ease;
 }
 
-.v-enter-from,
-.v-leave-to {
+.answer-enter-from,
+.answer-leave-to {
   transform: translateY(-100px);
   opacity: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .card-container {
+    width: 500px;
+    padding: 24px;
+  }
+
+  .card-header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .card-header img {
+    width: 36px;
+  }
+
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  .question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+  }
+
+  .question > span {
+    max-width: 410px;
+  }
+
+  .question > img {
+    width: 24px;
+  }
+
+  .answer {
+    padding: 12px 0;
+  }
 }
 </style>
